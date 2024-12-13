@@ -18,6 +18,20 @@ provider:
       Resource:
         - "arn:aws:dynamodb:us-east-1:536697266402:table/BooksTableNew"
 
+resources:
+  Resources:
+    BooksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: BookTableNew
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: BookID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: BookID
+            KeyType: HASH
+
 
 functions:
   createBook:
@@ -55,18 +69,5 @@ functions:
           path: /books/{BookID}
           method: delete
 
-resources:
-  Resources:
-    BooksTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: BookTableNew
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: BookID
-            AttributeType: S
-        KeySchema:
-          - AttributeName: BookID
-            KeyType: HASH
 
  
